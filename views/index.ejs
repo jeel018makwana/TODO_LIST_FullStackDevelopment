@@ -1,0 +1,37 @@
+<%- include("./partials/header") %>
+
+
+
+
+
+
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" href="#">TODO LIST</a>
+  </nav>
+
+<div class="container mt-5">
+    <!-- Form for adding a new Todo-->
+    <form action="/add/todo" method="POST" class="d-flex">
+        <input type="text" name="todo" class="form-control" placeholder="Enter TODO LIST" required>
+        <input type="submit" value="Add TODO" class="btn btn-md btn-primary mx-2">
+    </form>
+
+    <!--List of Todos-->
+    <ul class="list-group my-5">
+        <%  todo.forEach(todos =>{ %>
+            <li class="list-group-item"><%= todos.todo %> 
+            <!--Delete Button-->
+            <a href="/delete/todo/<%= todos._id %>" class="btn btn-danger btn-sm">Delete</a>
+            <!-- Display Todo in an editable input box -->
+                <form action="/update/todo/<%= todos._id %>" method="POST" class="d-flex">
+                    <input type="text" name="todo" value="<%= todos.todo %>" class="form-control form-control-sm" required>
+                    <input type="submit" value="Update" class="btn btn-warning btn-sm mx-2">
+                </form>
+            </li>
+            
+        <% }) %>
+        
+      </ul>
+</div>
+
+<%-  include("./partials/footer") %>
